@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 2 - Spring MVC CRUD</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}" class="brand">Restaurante MVC</a>
+    <div>
+        <a th:href="@{/usuarios}">Usuarios</a>
+        <a th:href="@{/pedidos}">Pedidos</a>
+    </div>
+</nav>
+<main class="container hero">
+    <section class="card hero-card">
+        <p class="tag">Desarrollo de Software Web - Unidad 2</p>
+        <h1>Aplicación Spring Boot MVC con CRUD</h1>
+        <p>Proyecto construido con controlador, modelo, servicio, repositorio y vistas Thymeleaf. Incluye el CRUD de usuarios solicitado en las guías y el CRUD del caso Restaurante/Pedido.</p>
+        <div class="actions">
+            <a class="btn" th:href="@{/usuarios}">Gestionar usuarios</a>
+            <a class="btn secondary" th:href="@{/pedidos}">Gestionar pedidos</a>
+        </div>
+    </section>
+</main>
+<footer>Universidad de Cartagena - Actividad académica</footer>
+</body>
+</html>
