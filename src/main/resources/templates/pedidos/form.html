@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Formulario pedido</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}" class="brand">Restaurante MVC</a>
+    <div>
+        <a th:href="@{/usuarios}">Usuarios</a>
+        <a th:href="@{/pedidos}">Pedidos</a>
+    </div>
+</nav>
+<main class="container narrow">
+    <section class="card">
+        <p class="tag">Formulario MVC</p>
+        <h1 th:text="${title}">Formulario pedido</h1>
+        <form th:action="@{/pedidos/guardar}" th:object="${pedido}" method="post" class="form">
+            <input type="hidden" th:field="*{id}">
+            <label>Número de pedido
+                <input type="text" th:field="*{numeroPedido}" placeholder="Ej: PED-001">
+                <small class="error" th:if="${#fields.hasErrors('numeroPedido')}" th:errors="*{numeroPedido}"></small>
+            </label>
+            <label>Cliente
+                <input type="text" th:field="*{cliente}" placeholder="Nombre del cliente">
+                <small class="error" th:if="${#fields.hasErrors('cliente')}" th:errors="*{cliente}"></small>
+            </label>
+            <label>Producto o plato
+                <input type="text" th:field="*{producto}" placeholder="Ej: Almuerzo ejecutivo">
+                <small class="error" th:if="${#fields.hasErrors('producto')}" th:errors="*{producto}"></small>
+            </label>
+            <label>Cantidad
+                <input type="number" th:field="*{cantidad}" min="1">
+                <small class="error" th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"></small>
+            </label>
+            <label>Valor unitario
+                <input type="number" th:field="*{valorUnitario}" min="0" step="100">
+                <small class="error" th:if="${#fields.hasErrors('valorUnitario')}" th:errors="*{valorUnitario}"></small>
+            </label>
+            <label>Fecha
+                <input type="date" th:field="*{fecha}">
+            </label>
+            <label>Estado
+                <select th:field="*{estado}">
+                    <option value="PENDIENTE">PENDIENTE</option>
+                    <option value="EN_PREPARACION">EN_PREPARACIÓN</option>
+                    <option value="ENTREGADO">ENTREGADO</option>
+                    <option value="CANCELADO">CANCELADO</option>
+                </select>
+                <small class="error" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></small>
+            </label>
+            <div class="actions">
+                <button class="btn" type="submit">Guardar</button>
+                <a class="btn secondary" th:href="@{/pedidos}">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+<footer>Universidad de Cartagena - Actividad académica</footer>
+</body>
+</html>

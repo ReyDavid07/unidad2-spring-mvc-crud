@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}" class="brand">Restaurante MVC</a>
+    <div>
+        <a th:href="@{/usuarios}">Usuarios</a>
+        <a th:href="@{/pedidos}">Pedidos</a>
+    </div>
+</nav>
+<main class="container">
+    <div class="page-header">
+        <div>
+            <p class="tag">CRUD caso asignado</p>
+            <h1>Pedidos del restaurante</h1>
+        </div>
+        <a class="btn" th:href="@{/pedidos/nuevo}">Nuevo pedido</a>
+    </div>
+    <div th:if="${success}" class="alert success" th:text="${success}"></div>
+    <section class="card table-card">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Número</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Valor unitario</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pedido : ${pedidos}">
+                <td th:text="${pedido.id}"></td>
+                <td th:text="${pedido.numeroPedido}"></td>
+                <td th:text="${pedido.cliente}"></td>
+                <td th:text="${pedido.producto}"></td>
+                <td th:text="${pedido.cantidad}"></td>
+                <td th:text="${pedido.valorUnitario}"></td>
+                <td th:text="${pedido.total}"></td>
+                <td><span class="badge" th:text="${pedido.estado}"></span></td>
+                <td class="actions-cell">
+                    <a class="link" th:href="@{/pedidos/editar/{id}(id=${pedido.id})}">Editar</a>
+                    <a class="link danger" th:href="@{/pedidos/eliminar/{id}(id=${pedido.id})}" onclick="return confirm('¿Desea eliminar este pedido?')">Eliminar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(pedidos)}">
+                <td colspan="9" class="empty">No hay pedidos registrados.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<footer>Universidad de Cartagena - Actividad académica</footer>
+</body>
+</html>

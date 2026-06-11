@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Formulario usuario</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}" class="brand">Restaurante MVC</a>
+    <div>
+        <a th:href="@{/usuarios}">Usuarios</a>
+        <a th:href="@{/pedidos}">Pedidos</a>
+    </div>
+</nav>
+<main class="container narrow">
+    <section class="card">
+        <p class="tag">Formulario MVC</p>
+        <h1 th:text="${title}">Formulario usuario</h1>
+        <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post" class="form">
+            <input type="hidden" th:field="*{id}">
+            <label>Nombre
+                <input type="text" th:field="*{name}" placeholder="Ej: Juan Pérez">
+                <small class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+            </label>
+            <label>Correo electrónico
+                <input type="email" th:field="*{email}" placeholder="usuario@correo.com">
+                <small class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+            </label>
+            <label>Contraseña
+                <input type="password" th:field="*{password}" placeholder="Mínimo 4 caracteres">
+                <small class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+            </label>
+            <label>Rol
+                <select th:field="*{role}">
+                    <option value="">Seleccione...</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="MESERO">MESERO</option>
+                    <option value="CAJERO">CAJERO</option>
+                </select>
+                <small class="error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></small>
+            </label>
+            <label>Estado
+                <select th:field="*{status}">
+                    <option value="ACTIVO">ACTIVO</option>
+                    <option value="INACTIVO">INACTIVO</option>
+                </select>
+                <small class="error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></small>
+            </label>
+            <div class="actions">
+                <button class="btn" type="submit">Guardar</button>
+                <a class="btn secondary" th:href="@{/usuarios}">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+<footer>Universidad de Cartagena - Actividad académica</footer>
+</body>
+</html>
